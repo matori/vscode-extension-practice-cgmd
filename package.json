@@ -1,0 +1,83 @@
+{
+  "name": "vscode-codegrid-markdown-preview",
+  "displayName": "vscode-codegrid-markdown-preview",
+  "description": "",
+  "version": "0.0.1",
+  "publisher": "matori",
+  "engines": {
+    "vscode": "^1.54.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:markdown"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "vscode-codegrid-markdown-preview.sidePreview",
+        "title": "Show side preview",
+        "category": "menubar",
+        "icon": {
+          "light": "./assets/icon/PreviewOnRightPane_16x.svg",
+          "dark": "./assets/icon/PreviewOnRightPane_16x_dark.svg"
+        }
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "CodeGrid Markdown Preview",
+      "properties": {
+        "vscode-codegrid-markdown-preview.scrollPreviewWithEditor": {
+          "type": "boolean",
+          "default": true,
+          "description": "Scroll preview window when you scroll Editor"
+        }
+      }
+    },
+    "menus": {
+      "editor/title": [
+        {
+          "command": "vscode-codegrid-markdown-preview.sidePreview",
+          "when": "editorLangId == markdown",
+          "group": "navigation"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "vscode-codegrid-markdown-preview.sidePreview",
+        "key": "ctrl+q s",
+        "mac": "cmd+q s",
+        "when": "editorTextFocus"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.54.0",
+    "@types/glob": "^7.1.3",
+    "@types/mocha": "^8.0.4",
+    "@types/node": "^12.11.7",
+    "eslint": "^7.19.0",
+    "@typescript-eslint/eslint-plugin": "^4.14.1",
+    "@typescript-eslint/parser": "^4.14.1",
+    "glob": "^7.1.6",
+    "mocha": "^8.2.1",
+    "typescript": "^4.1.3",
+    "vscode-test": "^1.5.0"
+  },
+  "dependencies": {
+    "codegrid-markdown": "^5.0.0",
+    "marked": "^2.0.1"
+  }
+}
